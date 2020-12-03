@@ -7,14 +7,18 @@ import { getConvictions, useConvictions } from "./ConvictionProvider.js"
 // Get a reference to the DOM element where the <select> will be rendered
 const contentTarget = document.querySelector(".filters__crime")
 
+
+
 export const ConvictionSelect = () => {
     // Get all convictions from application state
+    // Can't use useConvictions until getConvictions has completed. Must have .then for this.
     getConvictions().then(() => {
         const convictions = useConvictions()
         render(convictions)
     })
 }
 
+// Render to the DOM by passing in the convictions array from above
 const render = convictionsCollection => {
     /*
         Use interpolation here to invoke the map() method on
