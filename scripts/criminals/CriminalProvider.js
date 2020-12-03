@@ -10,7 +10,7 @@ export const getCriminals = () => {
         //Wait for the converted data, and then store it in a local array
         .then(
             parsedCriminals => {
-                console.table(parsedCriminals)
+                // console.table(parsedCriminals)
                 criminals = parsedCriminals
             }
         )

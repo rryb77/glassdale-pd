@@ -5,8 +5,18 @@
 }
 
 .criminal {
-    border: 1px dotted black;
+    border: 2px solid black;
+    background: #9ebc99;
     flex-basis: 25%;
     margin: 12px 0;
     padding: 0 8px 12px;
+}
+
+.criminalName {
+    color: #4e7851;
+    font-weight: 400;
+}
+
+div {
+    color: #a96562;
 }
