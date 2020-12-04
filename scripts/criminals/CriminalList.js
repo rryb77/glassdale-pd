@@ -1,5 +1,6 @@
 import { getCriminals, useCriminals } from './CriminalProvider.js'
 import { Criminal } from './Criminal.js'
+import { useConvictions } from '../convictions/ConvictionProvider.js'
 
 const eventHub = document.querySelector(".container")
 const contentTarget = document.querySelector(".criminalsContainer")
@@ -8,12 +9,16 @@ const contentTarget = document.querySelector(".criminalsContainer")
 eventHub.addEventListener('crimeChosen', event => {
     // Use the property you added to the event detail.
     let appStateCriminals = useCriminals()
+    let appStateCrimes = useConvictions()
+    
+    console.log(event.detail)
 
     if (event.detail.crimeThatWasChosen !== "0"){
         /*
             Filter the criminals application state down to the people that committed the crime
         */
-        const matchingCriminals = appStateCriminals.filter(crime => crime.conviction === event.detail.crimeThatWasChosen)
+        const crime = appStateCrimes.find( (crime) => crime.id === parseInt(event.detail.crimeThatWasChosen))
+        const matchingCriminals = appStateCriminals.filter(criminal => criminal.conviction === crime.name)
         /*
             Then invoke render() and pass the filtered collection as
             an argument

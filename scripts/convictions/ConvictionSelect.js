@@ -48,7 +48,7 @@ const render = convictionsCollection => {
                 convictionsCollection.map(
                     convictionObj => {
                         const valueToBeInNewArray = convictionObj.name
-                        return `<option>${valueToBeInNewArray}</option>`
+                        return `<option value=${convictionObj.id}>${valueToBeInNewArray}</option>`
                     }
                 )
             }
