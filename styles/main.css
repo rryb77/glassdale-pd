@@ -3,3 +3,12 @@
 body {
     background-color: #ccb8a8;
 }
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.filters__officer {
+    margin-left: 25px;
+}
