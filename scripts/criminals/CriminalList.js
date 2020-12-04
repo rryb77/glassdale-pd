@@ -21,6 +21,7 @@ eventHub.addEventListener('crimeChosen', event => {
         render(matchingCriminals)
 
     } else {
+        //render the full criminal list unfiltered.
         render(appStateCriminals)
     }
 })
