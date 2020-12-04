@@ -7,6 +7,7 @@ const contentTarget = document.querySelector(".criminalsContainer")
 // Listen for the custom event you dispatched in ConvictionSelect
 eventHub.addEventListener('crimeChosen', event => {
     // Use the property you added to the event detail.
+    
     contentTarget.innerHTML = ""
     let appStateCriminals = useCriminals()
 
@@ -19,11 +20,29 @@ eventHub.addEventListener('crimeChosen', event => {
             Then invoke render() and pass the filtered collection as
             an argument
         */
-       render(matchingCriminals)
+        render(matchingCriminals)
 
     } else {
         render(appStateCriminals)
     }
+})
+
+// Listen for the custom even dispatched in OfficerSelect
+eventHub.addEventListener("officerSelected", event => {
+    // How can you access the officer name that was selected by the user?
+    
+    const officerName = event.detail.officerThatWasChosen
+    // How can you get the criminals that were arrested by that officer?
+    const criminals = useCriminals()
+    const test = criminals.map(
+        criminalObject => {
+            if (criminalObject.arrestingOfficer === officerName) {
+                
+                // return true
+            }
+        }
+    )
+    console.log(test)
 })
 
 const render = criminalCollection => {
