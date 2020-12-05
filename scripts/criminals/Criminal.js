@@ -1,3 +1,4 @@
+// HTML that formats how the criminal data is displayed.
 export const Criminal = (criminal) => {
     return `
         <section class="criminal">
