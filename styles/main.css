@@ -12,3 +12,11 @@ body {
 .filters__officer {
     margin-left: 25px;
 }
+
+.noteFormContainer {
+    display: flex;
+}
+
+.noteForm {
+    
+}
