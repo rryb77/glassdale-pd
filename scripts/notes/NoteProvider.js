@@ -7,7 +7,9 @@ const dispatchStateChangeEvent = () => {
     eventHub.dispatchEvent(noteStateChangedEvent)
 }
 
-const getNotes = () => {
+export const useNotes = () => notes.slice()
+
+export const getNotes = () => {
     return fetch('http://localhost:8088/notes')
         //Using GET by default
         .then(response => response.json())
@@ -27,6 +29,7 @@ export const saveNote = note => {
         //Take the object passed in to saveNote and convert it to JSON via the JSON.stringify method.
         body: JSON.stringify(note)
     })
+    // Get the updated state to match the application state
     .then(getNotes)
     .then(dispatchStateChangeEvent)
 }
