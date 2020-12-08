@@ -1,4 +1,5 @@
 @import "criminal.css";
+@import "note.css";
 
 body {
     background-color: #ccb8a8;
@@ -11,12 +12,4 @@ body {
 
 .filters__officer {
     margin-left: 25px;
-}
-
-.noteFormContainer {
-    display: flex;
-}
-
-.noteForm {
-    
 }

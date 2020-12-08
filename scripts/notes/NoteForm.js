@@ -27,6 +27,7 @@ eventHub.addEventListener("click", clickEvent => {
 
         // Change API state and application state
         saveNote(newNote)
+        // Clear out the form
         author.value = ""
         text.value = ""
         suspect.value = ""
@@ -36,6 +37,7 @@ eventHub.addEventListener("click", clickEvent => {
 
 const render = () => {
     contentTarget.innerHTML = `
+    <div class="noteForm">
         <label for="author">Author:</label>
         <input type="text" id="author" placeholder="author name">
         <label for="text">Notes:</label>
@@ -43,6 +45,7 @@ const render = () => {
         <label for="suspect">Suspect:</label>
         <input type="text" id="suspect" placeholder="suspect name">
         <button id="saveNote">Save Note</button>
+    </div>
     `
 }
 
