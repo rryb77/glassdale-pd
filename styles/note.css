@@ -3,31 +3,47 @@
     flex-wrap: wrap;
     border: 2px solid black;
     flex-direction: column;
-    width: 350px;
+    width: 90%;
+    height: 250px;
     align-items: center;
-    margin: 25px;
     padding: 10px;
     background-color: silver;
+    margin-top: 12px;
+}
+#text {
+    height: 90%;
 }
 
 .noteForm {
-    align-self: center;
+    align-content: center;
+    height: 90%;
 }
 
 #author {
-    width: 300px;
+    width: 95%;
 }
 
 #text {
-    width: 300px;
-    height: 250px;
+    width: 95%;
+    height: 50%;
 }
 
 #suspect {
-    width: 300px;
+    width: 95%;
+}
+#showNotes {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #saveNote {
     margin-top: 10px;
-    width: 100px;
+    width: 30%;
 }
+
+.note {
+    background-color: silver;
+    border: black solid 2px;
+    margin-bottom: 10px;
+}
+/* change left container width to 75%, right container to 25%, adjust width of noteformcontainer etc to percent as well */
