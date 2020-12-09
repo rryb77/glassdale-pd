@@ -7,6 +7,11 @@ const eventHub = document.querySelector(".container")
 // HTML location to generate data on the DOM
 const contentTarget = document.querySelector(".criminalsContainer")
 
+eventHub.addEventListener('criminalClicked', () => {
+    console.log('Receiving broadcasted even')
+    CriminalList()
+})
+
 // Listen for the custom event that was dispatched in ConvictionSelect. Use console.log() to be sure the listener is setup properly.
 eventHub.addEventListener('crimeChosen', event => {
     

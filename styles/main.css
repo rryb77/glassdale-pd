@@ -8,8 +8,22 @@ body {
 .filters {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .filters__officer {
     margin-left: 25px;
+}
+
+.listContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.leftContainer {
+    width: 75%;
+}
+
+.rightContainer {
+    width: 25%;
 }
