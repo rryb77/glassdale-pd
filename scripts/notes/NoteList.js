@@ -5,8 +5,9 @@ import { NoteHTMLConverter } from "./Note.js";
 const contentTarget = document.querySelector(".noteList")
 // Define ye olde Evente Hubbe
 const eventHub = document.querySelector(".container")
-let visibility = false;
 
+//Toggle Notes button was clicked..
+let visibility = false;
 eventHub.addEventListener("showNotesClicked", customEvent => {
     
     if (visibility === false) {
@@ -18,6 +19,8 @@ eventHub.addEventListener("showNotesClicked", customEvent => {
     }
 })
 
+
+// Update the DOM when the note state changes
 eventHub.addEventListener("noteStateChanged", () => {
     //if it's rendered to the DOM or not?
     if (visibility === true) {
@@ -40,7 +43,6 @@ const render = (noteArray) => {
 export const NoteList = () => {
     getNotes()
         .then(() => {
-            debugger
             const allNotes = useNotes()
             render(allNotes)
         })
