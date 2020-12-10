@@ -12,20 +12,18 @@ eventHub.addEventListener("showAlibiClicked", customEvent => {
     let criminals = useCriminals()
     const criminal = criminals.find( (criminal) => criminal.id === customEvent.detail.criminalID)
     
-    //reset the dialog
-    contentTarget.innerHTML = ""
     //close dialog if another is open
     dialogToggle.close()
 
     //Loop through known associates to add them to the DOM with their alibi
     for (let i=0; i < criminal.known_associates.length; i++) {
         contentTarget.innerHTML += `<div class="note__alibi"><b>Known Associate:</b> ${ criminal.known_associates[i].name }  <p><b>Alibi:</b> ${criminal.known_associates[i].alibi }<br><br></div>`
-    }
-    
+    }  
+
     //Add the close button to the dialog after the loop is finished
     contentTarget.innerHTML += `<button id="closeDialog">Close</button>`
     //show the dialog
-    dialogToggle.show()
+    dialogToggle.showModal()
     
 })
 
