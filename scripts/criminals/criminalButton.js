@@ -7,7 +7,6 @@ export const ShowCriminalButton = () => {
 
 eventHub.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "criminal") {
-        console.log('Dispatching event criminalClicked')
         const customEvent = new CustomEvent("criminalClicked")
         eventHub.dispatchEvent(customEvent)
     }
