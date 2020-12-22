@@ -13,7 +13,7 @@ eventHub.addEventListener("click", clickEvent => {
         // The .value attribute captures the text typed in those respective input element
         const author = document.querySelector("#author")
         const text = document.querySelector("#text")
-        const criminalId = document.querySelector('#noteForm--criminal')
+        const selectedCriminalId = document.querySelector('#noteForm--criminal')
 
         // Make a new object representation of a note
         // Use the defined variables above to create key/value pairs
@@ -22,7 +22,7 @@ eventHub.addEventListener("click", clickEvent => {
             author: author.value,
             text: text.value,
             timestamp: Date.now(),
-            criminalId: parseInt(criminalId.value)
+            criminalId: parseInt(selectedCriminalId.value)
 
         }
 
@@ -31,7 +31,7 @@ eventHub.addEventListener("click", clickEvent => {
         // Clear out the form
         author.value = ""
         text.value = ""
-        criminalId.value = 1
+        selectedCriminalId.value = 1
         
     }
 })
