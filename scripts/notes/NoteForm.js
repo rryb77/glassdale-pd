@@ -1,5 +1,6 @@
 const contentTarget = document.querySelector(".noteFormContainer")
 const eventHub = document.querySelector(".container")
+import { getCriminals, useCriminals } from '../criminals/CriminalProvider.js'
 import { saveNote } from './NoteProvider.js'
 
 //Send the data to the stored db via the API
@@ -35,15 +36,32 @@ eventHub.addEventListener("click", clickEvent => {
     }
 })
 
-const render = () => {
+export const CriminalSelect = () => {
+    // Get all convictions from application state
+    // Can't use useConvictions until getConvictions has completed. Must have .then for this.
+    getCriminals().then(() => {
+        const criminalCollection = useCriminals()
+        render(criminalCollection)
+    })
+}
+
+const render = (criminalCollection) => {
     contentTarget.innerHTML = `
     <div class="noteForm">
         <label for="author">Author:</label>
-        <input type="text" id="author" placeholder="author name">
+            <input type="text" id="author" placeholder="author name">
         <label for="text">Notes:</label>
-        <textarea id="text" placeholder="note text"></textarea>
-        <label for="suspect">Suspect:</label>
-        <input type="text" id="suspect" placeholder="suspect name">
+            <textarea id="text" placeholder="note text"></textarea>
+        <select id="noteForm--criminal" class="criminalSelect">
+        <option value="0">Select a criminal...</option>
+            ${
+                criminalCollection.map(
+                    criminalObj => {
+                        return `<option value="${ criminalObj.id }">${ criminalObj.name }</option>`
+                    }
+                )
+            }    
+        </select>
         <button id="saveNote">Save Note</button>
     </div>
     `
