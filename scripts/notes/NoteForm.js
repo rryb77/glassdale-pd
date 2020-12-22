@@ -13,8 +13,7 @@ eventHub.addEventListener("click", clickEvent => {
         // The .value attribute captures the text typed in those respective input element
         const author = document.querySelector("#author")
         const text = document.querySelector("#text")
-        const suspect = document.querySelector("#suspect")
-
+        const selectedCriminalId = document.querySelector('#noteForm--criminal')
 
         // Make a new object representation of a note
         // Use the defined variables above to create key/value pairs
@@ -22,8 +21,9 @@ eventHub.addEventListener("click", clickEvent => {
             // Key/value pairs here
             author: author.value,
             text: text.value,
-            suspect: suspect.value,
-            timestamp: Date.now()
+            timestamp: Date.now(),
+            criminalId: parseInt(selectedCriminalId.value)
+
         }
 
         // Change API state and application state
@@ -31,7 +31,7 @@ eventHub.addEventListener("click", clickEvent => {
         // Clear out the form
         author.value = ""
         text.value = ""
-        suspect.value = ""
+        selectedCriminalId.value = 1
         
     }
 })
@@ -53,14 +53,13 @@ const render = (criminalCollection) => {
         <label for="text">Notes:</label>
             <textarea id="text" placeholder="note text"></textarea>
         <select id="noteForm--criminal" class="criminalSelect">
-        <option value="0">Select a criminal...</option>
-            ${
-                criminalCollection.map(
-                    criminalObj => {
-                        return `<option value="${ criminalObj.id }">${ criminalObj.name }</option>`
-                    }
-                )
-            }    
+                ${
+                    criminalCollection.map(
+                        criminalObj => {
+                            return `<option value="${ criminalObj.id }" class="criminalSelection">${ criminalObj.name }</option>`
+                        }
+                    )
+                }    
         </select>
         <button id="saveNote">Save Note</button>
     </div>
