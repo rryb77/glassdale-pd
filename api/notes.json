@@ -1,13 +1,6 @@
 {
   "notes": [
     {
-      "author": "rtrt",
-      "text": "rtrtrtr",
-      "timestamp": 1608671912670,
-      "criminalId": 8,
-      "id": 35
-    },
-    {
       "author": "Ryan",
       "text": "Test",
       "timestamp": 1608671993308,
@@ -36,10 +29,10 @@
       "id": 39
     },
     {
-      "author": "rrrrrrrrrrrrrrrrr",
-      "text": "rrrrrrrrrrrrrrrrrrrrrrrrr",
-      "timestamp": 1608673337770,
-      "criminalId": 98,
+      "author": "Test",
+      "text": "Testtttttttttttt",
+      "timestamp": 1608745824191,
+      "criminalId": 16,
       "id": 40
     }
   ]
