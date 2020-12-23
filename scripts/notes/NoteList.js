@@ -1,10 +1,31 @@
-import { getNotes, useNotes } from "./NoteProvider.js";
+import { getNotes, useNotes, deleteNote } from "./NoteProvider.js";
 import { useCriminals } from "../criminals/CriminalProvider.js";
 
 // Query the DOM for the element that your notes will be added to 
 const contentTarget = document.querySelector(".noteList")
 // Define ye olde Evente Hubbe
 const eventHub = document.querySelector(".container")
+
+// Listen for the delete button on saved notes
+eventHub.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id.startsWith("deleteNote--")) {
+        const [prefix, id] = clickEvent.target.id.split("--")
+
+        /*
+            Invoke the function that performs the delete operation.
+
+            Once the operation is complete you should THEN invoke
+            useNotes() and render the note list again.
+        */
+       deleteNote(id).then(
+           () => {
+               const updatedNotes = useNotes()
+               const criminals = useCriminals()
+               render(updatedNotes, criminals)
+           }
+       )
+    }
+})
 
 //Toggle Notes button was clicked..
 let visibility = false;
@@ -40,6 +61,7 @@ const render = (noteArray, criminalArray) => {
                 <div class="note__text"><b>Note:</b> ${ note.text }</div>
                 <div class="note__author"><b>Author:</b> ${ note.author }</div>
                 <div class="note__timestamp"><b>Timestamp:</b> ${ new Date(note.timestamp).toLocaleDateString('en-US')  }</div>
+                <button id="deleteNote--${note.id}">Delete</button>
             </section>
         `
         }
