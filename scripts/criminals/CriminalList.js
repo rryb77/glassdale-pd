@@ -9,6 +9,7 @@ const eventHub = document.querySelector(".container")
 // HTML location to generate data on the DOM
 const contentTarget = document.querySelector(".criminalsContainer")
 
+// criminalClicked event is heard so do this...
 eventHub.addEventListener('criminalClicked', () => {
     CriminalList()
 })
@@ -20,6 +21,10 @@ eventHub.addEventListener('crimeChosen', event => {
     let appStateCriminals = useCriminals()
     // Grab the conviction data
     let appStateCrimes = useConvictions()
+    // Get the array of facilities
+    const facilities = useFacilities()
+    // Get the array of criminal facilities
+    const crimFac = useCriminalFacilities()
 
     // If the property that was selected from the dropdown is NOT equal to "0" then..
     if (event.detail.crimeThatWasChosen !== "0"){
@@ -29,14 +34,14 @@ eventHub.addEventListener('crimeChosen', event => {
 
         // Use the filter method to create a new array of criminals that meet the condition of the selected conviction
         const matchingCriminals = appStateCriminals.filter(criminal => criminal.conviction === crime.name)
-        
+
         // Render it to the DOM
-        render(matchingCriminals)
+        render(matchingCriminals, facilities, crimFac)
     
     // If the dropdown value is = "0" then..
     } else {
         // Render the full criminal list unfiltered.
-        render(appStateCriminals)
+        render(appStateCriminals, facilities, crimFac)
     }
 })
 
@@ -48,6 +53,10 @@ eventHub.addEventListener("officerSelected", event => {
 
     // Get the array of criminals
     const criminals = useCriminals()
+    // Get the array of facilities
+    const facilities = useFacilities()
+    // Get the array of criminal facilities
+    const crimFac = useCriminalFacilities()
 
     // Use the filter method to create a new array of criminals that were arrested by the selected officer.
     const matchingCriminalsByOfficer = criminals.filter(
@@ -58,18 +67,17 @@ eventHub.addEventListener("officerSelected", event => {
         }
     )
     // Send it to the DOM
-    render(matchingCriminalsByOfficer)   
+    render(matchingCriminalsByOfficer, facilities, crimFac)   
     
     // Reset the DOM to the full list if the dropdown value is equal to 0
     if (event.detail.officerThatWasChosen === "0") {
-        render(criminals)
+        render(criminals, facilities, crimFac)
     }
 })
 
 // Function to get all information on the DOM
 const render = (criminalsToRender, allFacilities, allRelationships) => {
     //clear the DOM before rendering to only show the filtered info
-    console.log('alRelationships Array: ', allRelationships)
     contentTarget.innerHTML = criminalsToRender.map(
         (criminalObject) => {
             // Step 2 - Filter all relationships to get only ones for this criminal
@@ -89,8 +97,9 @@ const render = (criminalsToRender, allFacilities, allRelationships) => {
 
 // Setup the list of criminals
 export const CriminalList = () => {
-    // Call getCriminals then wait for it to complete
+    // Call getFacilities then...
     getFacilities()
+        // getCriminalFacilities then...
         .then(getCriminalFacilities)
         .then(
             () => {
@@ -98,7 +107,6 @@ export const CriminalList = () => {
                 const facilities = useFacilities()
                 const crimFac = useCriminalFacilities()
                 const criminals = useCriminals()
-                console.log('Criminal Facilities: ', crimFac)
 
                 // Pass all three collections of data to render()
                 render(criminals, facilities, crimFac)
