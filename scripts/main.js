@@ -10,8 +10,11 @@ import { WitnessList } from './witnesses/witnessList.js';
 import { ShowWitnessButton } from './witnesses/witnessButton.js';
 import { ShowCriminalButton } from './criminals/criminalButton.js';
 import { NoteForm } from './notes/NoteForm.js';
+import { ShowFacilityButton } from './facility/facilitiesButtonClicked.js';
+import { FacilityList } from './facility/facilityList.js';
 
 WitnessList();
+FacilityList();
 NoteForm()
 CriminalList();
 ConvictionSelect();
@@ -19,3 +22,4 @@ OfficerSelect();
 ShowNoteButton();
 ShowWitnessButton();
 ShowCriminalButton();
+ShowFacilityButton();

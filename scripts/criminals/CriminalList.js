@@ -8,6 +8,7 @@ import { getCriminalFacilities, useCriminalFacilities } from '../facility/Crimin
 const eventHub = document.querySelector(".container")
 // HTML location to generate data on the DOM
 const contentTarget = document.querySelector(".criminalsContainer")
+const facilityTarget = document.querySelector(".facilityContainer")
 
 // criminalClicked event is heard so do this...
 eventHub.addEventListener('criminalClicked', () => {
@@ -34,7 +35,8 @@ eventHub.addEventListener('crimeChosen', event => {
 
         // Use the filter method to create a new array of criminals that meet the condition of the selected conviction
         const matchingCriminals = appStateCriminals.filter(criminal => criminal.conviction === crime.name)
-
+        // Clear facility DOM
+        facilityTarget.innerHTML = ""
         // Render it to the DOM
         render(matchingCriminals, facilities, crimFac)
     
@@ -66,6 +68,10 @@ eventHub.addEventListener("officerSelected", event => {
             }
         }
     )
+    
+    // Clear facility DOM
+    facilityTarget.innerHTML = ""
+
     // Send it to the DOM
     render(matchingCriminalsByOfficer, facilities, crimFac)   
     
@@ -107,6 +113,9 @@ export const CriminalList = () => {
                 const facilities = useFacilities()
                 const crimFac = useCriminalFacilities()
                 const criminals = useCriminals()
+                
+                // Clear facility DOM
+                facilityTarget.innerHTML = ""
 
                 // Pass all three collections of data to render()
                 render(criminals, facilities, crimFac)

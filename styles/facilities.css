@@ -1,23 +1,20 @@
-.criminalsContainer {
+.facilityContainer {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
-.criminal {
+.facility {
     border: 2px solid black;
-    background: #9ebc99;
+    background: #a09fd3;
     flex-basis: 25%;
     margin: 12px 0;
     padding: 0 8px 12px;
-    color: #a96562
+    color: #330668;
+
 }
 
-.criminalName {
+.facilityName {
     color: #4e7851;
     font-weight: 400;
 }
-
-/* div {
-    color: #a96562;
-} */

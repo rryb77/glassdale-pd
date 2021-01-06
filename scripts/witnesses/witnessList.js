@@ -6,7 +6,8 @@ import { CriminalList } from '../criminals/CriminalList.js'
 const eventHub = document.querySelector(".container")
 // HTML location to generate data on the DOM
 const contentTarget = document.querySelector(".criminalsContainer")
-const witnessToggle = document.getElementById("witness"); 
+const facilityTarget = document.querySelector(".facilityContainer")
+
 
 let witnessShown = false;
 // Listen for the custom event that was dispatched in ConvictionSelect. Use console.log() to be sure the listener is setup properly.
@@ -14,6 +15,7 @@ eventHub.addEventListener('witnessClicked', () => {
     // Grab the witness data
     let theWitnesses = useWitnesses()
     if (witnessShown === false) {
+        facilityTarget.innerHTML = ""
         render(theWitnesses)
         witnessShown = true
 
