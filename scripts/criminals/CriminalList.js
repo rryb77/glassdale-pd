@@ -9,6 +9,7 @@ const eventHub = document.querySelector(".container")
 // HTML location to generate data on the DOM
 const contentTarget = document.querySelector(".criminalsContainer")
 
+// criminalClicked event is heard so do this...
 eventHub.addEventListener('criminalClicked', () => {
     CriminalList()
 })
@@ -20,7 +21,9 @@ eventHub.addEventListener('crimeChosen', event => {
     let appStateCriminals = useCriminals()
     // Grab the conviction data
     let appStateCrimes = useConvictions()
+    // Get the array of facilities
     const facilities = useFacilities()
+    // Get the array of criminal facilities
     const crimFac = useCriminalFacilities()
 
     // If the property that was selected from the dropdown is NOT equal to "0" then..
@@ -50,7 +53,9 @@ eventHub.addEventListener("officerSelected", event => {
 
     // Get the array of criminals
     const criminals = useCriminals()
+    // Get the array of facilities
     const facilities = useFacilities()
+    // Get the array of criminal facilities
     const crimFac = useCriminalFacilities()
 
     // Use the filter method to create a new array of criminals that were arrested by the selected officer.
@@ -73,7 +78,6 @@ eventHub.addEventListener("officerSelected", event => {
 // Function to get all information on the DOM
 const render = (criminalsToRender, allFacilities, allRelationships) => {
     //clear the DOM before rendering to only show the filtered info
-    console.log('alRelationships Array: ', allRelationships)
     contentTarget.innerHTML = criminalsToRender.map(
         (criminalObject) => {
             // Step 2 - Filter all relationships to get only ones for this criminal
@@ -93,8 +97,9 @@ const render = (criminalsToRender, allFacilities, allRelationships) => {
 
 // Setup the list of criminals
 export const CriminalList = () => {
-    // Call getCriminals then wait for it to complete
+    // Call getFacilities then...
     getFacilities()
+        // getCriminalFacilities then...
         .then(getCriminalFacilities)
         .then(
             () => {
@@ -102,7 +107,6 @@ export const CriminalList = () => {
                 const facilities = useFacilities()
                 const crimFac = useCriminalFacilities()
                 const criminals = useCriminals()
-                console.log('Criminal Facilities: ', crimFac)
 
                 // Pass all three collections of data to render()
                 render(criminals, facilities, crimFac)
