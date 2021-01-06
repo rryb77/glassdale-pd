@@ -36,16 +36,9 @@ eventHub.addEventListener("click", clickEvent => {
     }
 })
 
-export const CriminalSelect = () => {
-    // Get all convictions from application state
-    // Can't use useConvictions until getConvictions has completed. Must have .then for this.
-    getCriminals().then(() => {
-        const criminalCollection = useCriminals()
-        render(criminalCollection)
-    })
-}
+const render = () => {
+    const criminalCollection = useCriminals()
 
-const render = (criminalCollection) => {
     contentTarget.innerHTML = `
     <div class="noteForm">
         <label for="author">Author:</label>
@@ -67,5 +60,7 @@ const render = (criminalCollection) => {
 }
 
 export const NoteForm = () => {
-    render()
+    getCriminals().then(() => {
+        render()
+    })
 }
