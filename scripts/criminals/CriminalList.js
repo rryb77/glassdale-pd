@@ -1,6 +1,8 @@
 import { getCriminals, useCriminals } from './CriminalProvider.js'
 import { Criminal } from './Criminal.js'
 import { useConvictions } from '../convictions/ConvictionProvider.js'
+import { getFacilities, useFacilities } from '../facility/FacilityProvider.js'
+import { getCriminalFacilities, useCriminalFacilities } from '../facility/CriminalFacilityProvider.js'
 
 // Setup the eventHub to listen on the same class as the broadcast.
 const eventHub = document.querySelector(".container")
@@ -65,24 +67,41 @@ eventHub.addEventListener("officerSelected", event => {
 })
 
 // Function to get all information on the DOM
-const render = criminalCollection => {
+const render = (criminalsToRender, allFacilities, allRelationships) => {
     //clear the DOM before rendering to only show the filtered info
-    contentTarget.innerHTML = ""
-    
-    for (const criminalObj of criminalCollection) {
-        const filterCriminalHTML = Criminal(criminalObj)
-        contentTarget.innerHTML += filterCriminalHTML
+    console.log('alRelationships Array: ', allRelationships)
+    contentTarget.innerHTML = criminalsToRender.map(
+        (criminalObject) => {
+            // Step 2 - Filter all relationships to get only ones for this criminal
+            const facilityRelationshipsForThisCriminal = allRelationships.filter(cf => cf.criminalId === criminalObject.id)
 
-    }
+            // Step 3 - Convert the relationships to facilities with map()
+            const facilities = facilityRelationshipsForThisCriminal.map(cf => {
+                const matchingFacilityObject = allFacilities.find(facility => facility.id === cf.facilityId)
+                return matchingFacilityObject
+            })
+
+            // Must pass the matching facilities to the Criminal component
+            return Criminal(criminalObject, facilities)
+        }
+    ).join("")
 }
 
 // Setup the list of criminals
 export const CriminalList = () => {
     // Call getCriminals then wait for it to complete
-    getCriminals().then(() => {
-        // Once getCriminals is done store the data in a new array
-        const theCriminals = useCriminals()
-        // Send the array to the DOM
-        render(theCriminals)
-    })   
+    getFacilities()
+        .then(getCriminalFacilities)
+        .then(
+            () => {
+                // Pull in the data now that it has been fetched
+                const facilities = useFacilities()
+                const crimFac = useCriminalFacilities()
+                const criminals = useCriminals()
+                console.log('Criminal Facilities: ', crimFac)
+
+                // Pass all three collections of data to render()
+                render(criminals, facilities, crimFac)
+            }
+        )   
 }
