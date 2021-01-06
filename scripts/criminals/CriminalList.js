@@ -20,6 +20,8 @@ eventHub.addEventListener('crimeChosen', event => {
     let appStateCriminals = useCriminals()
     // Grab the conviction data
     let appStateCrimes = useConvictions()
+    const facilities = useFacilities()
+    const crimFac = useCriminalFacilities()
 
     // If the property that was selected from the dropdown is NOT equal to "0" then..
     if (event.detail.crimeThatWasChosen !== "0"){
@@ -29,14 +31,14 @@ eventHub.addEventListener('crimeChosen', event => {
 
         // Use the filter method to create a new array of criminals that meet the condition of the selected conviction
         const matchingCriminals = appStateCriminals.filter(criminal => criminal.conviction === crime.name)
-        
+
         // Render it to the DOM
-        render(matchingCriminals)
+        render(matchingCriminals, facilities, crimFac)
     
     // If the dropdown value is = "0" then..
     } else {
         // Render the full criminal list unfiltered.
-        render(appStateCriminals)
+        render(appStateCriminals, facilities, crimFac)
     }
 })
 
@@ -48,6 +50,8 @@ eventHub.addEventListener("officerSelected", event => {
 
     // Get the array of criminals
     const criminals = useCriminals()
+    const facilities = useFacilities()
+    const crimFac = useCriminalFacilities()
 
     // Use the filter method to create a new array of criminals that were arrested by the selected officer.
     const matchingCriminalsByOfficer = criminals.filter(
@@ -58,11 +62,11 @@ eventHub.addEventListener("officerSelected", event => {
         }
     )
     // Send it to the DOM
-    render(matchingCriminalsByOfficer)   
+    render(matchingCriminalsByOfficer, facilities, crimFac)   
     
     // Reset the DOM to the full list if the dropdown value is equal to 0
     if (event.detail.officerThatWasChosen === "0") {
-        render(criminals)
+        render(criminals, facilities, crimFac)
     }
 })
 
