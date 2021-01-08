@@ -21,13 +21,9 @@ eventHub.addEventListener('facilityClicked', () => {
             .then(getCriminalFacilities)
             .then(
                 () => {
-            // Once getWitnesses is done store the data in a new array
             const theFacilities = useFacilities()
             const theCriminals = useCriminals()
             const theCriminalFacilities = useCriminalFacilities()
-
-            // Send the array to the DOM
-            // render(theFacilities)
             facilityShown = true
             render(theCriminals, theFacilities, theCriminalFacilities)
         }) 
@@ -61,13 +57,9 @@ const render = (theCriminals, theFacilities, theCriminalFacilities) => {
     ).join("")
 }
 
-// Setup the list of criminals
 export const FacilityList = () => {
-    // Call getCriminals then wait for it to complete
+
     getFacilities().then(() => {
-        // Once getWitnesses is done store the data in a new array
         const theFacilities = useFacilities()
-        // Send the array to the DOM
-        // render(theFacilities)
     })   
 }

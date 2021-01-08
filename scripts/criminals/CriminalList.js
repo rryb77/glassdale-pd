@@ -103,8 +103,9 @@ const render = (criminalsToRender, allFacilities, allRelationships) => {
 
 // Setup the list of criminals
 export const CriminalList = () => {
-    // Call getFacilities then...
-    getFacilities()
+    getCriminals()    
+        // Call getFacilities then...
+        .then(getFacilities)
         // getCriminalFacilities then...
         .then(getCriminalFacilities)
         .then(
